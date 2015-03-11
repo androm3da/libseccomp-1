@@ -1,6 +1,5 @@
 # -*- mode: yaml; -*-
 # vim ft=yaml
-sudo: false
 language: c
 compiler: gcc
 matrix:
@@ -11,10 +10,12 @@ matrix:
           LDFLAGS="-fsanitize=address"
         - CFLAGS="-g -O2 -fsanitize=undefined -fno-omit-frame-pointer"
           LDFLAGS="-fsanitize=undefined"
-script: 
+before_install: 
+    - sudo apt-get install -qq libc6-dev
     - curl --remote-name 'http://pkgs.fedoraproject.org/repo/pkgs/astyle/astyle_2.05_linux.tar.gz/3806526408bb08db795f0d4d35ef48e5/astyle_2.05_linux.tar.gz'
-        && tar xf astyle_2.05.1_linux.tar.gz
+        && tar xf astyle_2.05_linux.tar.gz
         && ( cd astyle/build/gcc && make )
+script:
     -  PATH=astyle/build/gcc/bin:${PATH} ./autogen.sh 
         && ./configure 
         && make check
