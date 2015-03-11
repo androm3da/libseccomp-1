@@ -17,5 +17,4 @@ script:
         && ( cd astyle/build/gcc && make )
     -  PATH=astyle/build/gcc/bin:${PATH} ./autogen.sh 
         && ./configure 
-#       && make check-syntax 
         && make check
