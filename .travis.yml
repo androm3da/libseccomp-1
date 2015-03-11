@@ -13,7 +13,10 @@ matrix:
 before_install:
     - sudo apt-get install -qq libtool astyle
 script: 
-    -  ./autogen.sh 
+    - curl --remote-name 'http://downloads.sourceforge.net/project/astyle/astyle/astyle%202.05.1/astyle_2.05.1_linux.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fastyle%2F&ts=1426038647&use_mirror=hivelocity' \
+        && tar xf astyle_2.05.1_linux.tar.gz \
+        && ( cd astyle/build/gcc && make )
+    -  PATH=astyle/build/gcc/bin:${PATH} ./autogen.sh 
         && ./configure 
         && make check-syntax 
         && make check
