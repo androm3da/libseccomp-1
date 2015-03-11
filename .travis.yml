@@ -11,9 +11,9 @@ matrix:
         - CFLAGS="-g -O2 -fsanitize=undefined -fno-omit-frame-pointer"
           LDFLAGS="-fsanitize=undefined"
 before_install:
-    - sudo apt-get install -qq libtool cython astyle
+    - sudo apt-get install -qq libtool astyle
 script: 
     -  ./autogen.sh 
-        && ./configure --enable-python 
+        && ./configure 
         && make check-syntax 
         && make check
