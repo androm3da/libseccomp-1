@@ -56,7 +56,7 @@ static unsigned int _db_tree_free(struct db_arg_chain_tree *tree);
  */
 static unsigned int __db_tree_free(struct db_arg_chain_tree *tree)
 {
-	int cnt;
+	unsigned int cnt;
 
 	if (tree == NULL || --(tree->refcnt) > 0)
 		return 0;
@@ -104,7 +104,7 @@ static unsigned int _db_tree_free(struct db_arg_chain_tree *tree)
 static unsigned int _db_tree_remove(struct db_arg_chain_tree **tree,
 				    struct db_arg_chain_tree *node)
 {
-	int cnt = 0;
+	unsigned int cnt = 0;
 	struct db_arg_chain_tree *c_iter;
 
 	if (tree == NULL || *tree == NULL || node == NULL)

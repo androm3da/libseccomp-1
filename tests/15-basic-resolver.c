@@ -65,6 +65,7 @@ int main(int argc, char *argv[])
 	return 0;
 
 fail:
-	free(name);
+	if (name != NULL)
+		free(name);
 	return 1;
 }
