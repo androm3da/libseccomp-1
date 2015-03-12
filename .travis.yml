@@ -13,6 +13,6 @@ matrix:
 before_install: 
     - SAVED=${PWD}; cd /; sudo patch -p1 < ${SAVED}/tests/libc6-dev_2.19-0.elf.h.patch
 script:
-    -  PATH=astyle/build/gcc/bin:${PATH} ./autogen.sh 
+    - cd ${SAVED}; PATH=astyle/build/gcc/bin:${PATH} ./autogen.sh 
         && ./configure 
         && make check
