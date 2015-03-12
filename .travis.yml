@@ -10,9 +10,7 @@ matrix:
           LDFLAGS="-fsanitize=address"
         - CFLAGS="-g -O2 -fsanitize=undefined -fno-omit-frame-pointer"
           LDFLAGS="-fsanitize=undefined"
-before_install: 
-    - SAVED=${PWD}; cd /; sudo patch -p1 < ${SAVED}/tests/libc6-dev_2.19-0.elf.h.patch
 script:
-    - cd ${SAVED}; PATH=astyle/build/gcc/bin:${PATH} ./autogen.sh 
+    -  ./autogen.sh 
         && ./configure 
         && make check
