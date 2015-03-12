@@ -11,7 +11,7 @@ matrix:
         - CFLAGS="-g -O2 -fsanitize=undefined -fno-omit-frame-pointer"
           LDFLAGS="-fsanitize=undefined"
 before_install: 
-    - cd /; sudo patch -p1 < tests/libc6-dev_2.19-0.elf.h.patch
+    - SAVED=${PWD}; cd /; sudo patch -p1 < ${SAVED}/tests/libc6-dev_2.19-0.elf.h.patch
     - curl --remote-name 'http://pkgs.fedoraproject.org/repo/pkgs/astyle/astyle_2.05_linux.tar.gz/3806526408bb08db795f0d4d35ef48e5/astyle_2.05_linux.tar.gz'
         && tar xf astyle_2.05_linux.tar.gz
         && ( cd astyle/build/gcc && make )
