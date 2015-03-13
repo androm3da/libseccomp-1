@@ -246,7 +246,7 @@ static void __blk_free(struct bpf_state *state, struct bpf_blk *blk)
  */
 static void _blk_free(struct bpf_state *state, struct bpf_blk *blk)
 {
-	int iter;
+	unsigned int iter;
 	struct bpf_blk *b_iter;
 	struct bpf_instr *i_iter;
 
