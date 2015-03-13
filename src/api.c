@@ -597,7 +597,7 @@ API int seccomp_export_pfc(const scmp_filter_ctx ctx, int fd)
 /* NOTE - function header comment in include/seccomp.h */
 API int seccomp_export_bpf(const scmp_filter_ctx ctx, int fd)
 {
-	int rc;
+	ssize_t rc;
 	struct bpf_program *program;
 
 	if (_ctx_valid(ctx))
