@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -ex
 
 # This is a script for a continuous integration test service
 # So far, it works on:
