@@ -12,7 +12,7 @@ build_and_test_asan()
     export LDFLAGS="-fsanitize=address"
 
     ./autogen.sh  \
-            && ./configure  \
+            && ./configure --enable-python \
             && make --always-make check
 }
 
@@ -22,7 +22,7 @@ build_and_test_ubsan()
     export LDFLAGS="-fsanitize=undefined"
 
     ./autogen.sh  \
-            && ./configure  \
+            && ./configure --enable-python \
             && make --always-make check
 }
 
