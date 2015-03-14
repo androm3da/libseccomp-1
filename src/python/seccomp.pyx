@@ -312,7 +312,7 @@ cdef class SyscallFilter:
         if rc == -errno.EINVAL:
             raise ValueError("Invalid action")
         if rc != 0:
-            raise OSError(str.format("Library error (errno = {0})", os.strerror(rc)))
+            raise OSError(str.format("Library error (errno = {0})", os.strerror(-rc)))
         _defaction = defaction
 
     def merge(self, SyscallFilter filter):
@@ -329,7 +329,7 @@ cdef class SyscallFilter:
         """
         rc = libseccomp.seccomp_merge(self._ctx, filter._ctx)
         if rc != 0:
-            raise OSError(str.format("Library error (errno = {0})", os.strerror(rc)))
+            raise OSError(str.format("Library error (errno = {0})", os.strerror(-rc)))
         filter._ctx = NULL
         filter = SyscallFilter(filter._defaction)
 
@@ -352,7 +352,7 @@ cdef class SyscallFilter:
         elif rc == -errno.EINVAL:
             raise ValueError("Invalid architecture")
         else:
-            raise OSError(str.format("Library error (errno = {0})", os.strerror(rc)))
+            raise OSError(str.format("Library error (errno = {0})", os.strerror(-rc)))
 
     def add_arch(self, arch):
         """ Add an architecture to the filter.
@@ -370,7 +370,7 @@ cdef class SyscallFilter:
         if rc == -errno.EINVAL:
             raise ValueError("Invalid architecture")
         elif rc != 0:
-            raise OSError(str.format("Library error (errno = {0})", os.strerror(rc)))
+            raise OSError(str.format("Library error (errno = {0})", os.strerror(-rc)))
 
     def remove_arch(self, arch):
         """ Remove an architecture from the filter.
@@ -387,7 +387,7 @@ cdef class SyscallFilter:
         if rc == -errno.EINVAL:
             raise ValueError("Invalid architecture")
         elif rc != 0:
-            raise OSError(str.format("Library error (errno = {0})", os.strerror(rc)))
+            raise OSError(str.format("Library error (errno = {0})", os.strerror(-rc)))
 
     def load(self):
         """ Load the filter into the Linux Kernel.
@@ -398,7 +398,7 @@ cdef class SyscallFilter:
         """
         rc = libseccomp.seccomp_load(self._ctx)
         if rc != 0:
-            raise OSError(str.format("Library error (errno = {0})", os.strerror(rc)))
+            raise OSError(str.format("Library error (errno = {0})", os.strerror(-rc)))
 
     def get_attr(self, attr):
         """ Get an attribute value from the filter.
@@ -416,7 +416,7 @@ cdef class SyscallFilter:
         if rc == -errno.EINVAL:
             raise ValueError("Invalid attribute")
         elif rc != 0:
-            raise OSError(str.format("Library error (errno = {0})", os.strerror(rc)))
+            raise OSError(str.format("Library error (errno = {0})", os.strerror(-rc)))
         return value
 
     def set_attr(self, attr, int value):
@@ -434,7 +434,7 @@ cdef class SyscallFilter:
         if rc == -errno.EINVAL:
             raise ValueError("Invalid attribute")
         elif rc != 0:
-            raise OSError(str.format("Library error (errno = {0})", os.strerror(rc)))
+            raise OSError(str.format("Library error (errno = {0})", os.strerror(-rc)))
 
     def syscall_priority(self, syscall, int priority):
         """ Set the filter priority of a syscall.
@@ -461,7 +461,7 @@ cdef class SyscallFilter:
         rc = libseccomp.seccomp_syscall_priority(self._ctx,
                                                  syscall_num, priority)
         if rc != 0:
-            raise OSError(str.format("Library error (errno = {0})", os.strerror(rc)))
+            raise OSError(str.format("Library error (errno = {0})", os.strerror(-rc)))
 
     def add_rule(self, int action, syscall, *args):
         """ Add a new rule to filter.
@@ -543,7 +543,7 @@ cdef class SyscallFilter:
         else:
             raise RuntimeError("Maximum number of arguments exceeded")
         if rc != 0:
-            raise OSError(str.format("Library error (errno = {0})", os.strerror(rc)))
+            raise OSError(str.format("Library error (errno = {0})", os.strerror(-rc)))
 
     def add_rule_exactly(self, int action, syscall, *args):
         """ Add a new rule to filter.
@@ -626,7 +626,7 @@ cdef class SyscallFilter:
         else:
             raise RuntimeError("Maximum number of arguments exceeded")
         if rc != 0:
-            raise OSError(str.format("Library error (errno = {0})", os.strerror(rc)))
+            raise OSError(str.format("Library error (errno = {0})", os.strerror(-rc)))
 
     def export_pfc(self, file):
         """ Export the filter in PFC format.
@@ -641,7 +641,7 @@ cdef class SyscallFilter:
         """
         rc = libseccomp.seccomp_export_pfc(self._ctx, file.fileno())
         if rc != 0:
-            raise OSError(str.format("Library error (errno = {0})", os.strerror(rc)))
+            raise OSError(str.format("Library error (errno = {0})", os.strerror(-rc)))
 
     def export_bpf(self, file):
         """ Export the filter in BPF format.
@@ -655,7 +655,7 @@ cdef class SyscallFilter:
         """
         rc = libseccomp.seccomp_export_bpf(self._ctx, file.fileno())
         if rc != 0:
-            raise OSError(str.format("Library error (errno = {0})", os.strerror(rc)))
+            raise OSError(str.format("Library error (errno = {0})", os.strerror(-rc)))
 
 # kate: syntax python;
 # kate: indent-mode python; space-indent on; indent-width 4; mixedindent off;
